@@ -1,8 +1,11 @@
 import React from "react";
 
-import "../Styles/App.css";
+import { makeStyles } from "@material-ui/core/styles";
 
 // components
+import Navigation from "./Navigation";
+
+// mui components
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -19,26 +22,59 @@ import ImageList from "@material-ui/core/ImageList";
 
 // icons
 
+const useStyles = makeStyles((theme) => ({
+  subheader: {
+    width: "70vw",
+    margin: "0 auto",
+  },
+  content: {
+    padding: theme.spacing(4),
+  },
+}));
+
 const Product = () => {
+  const classes = useStyles();
+
   return (
-    <Grid container justifyContent="center" spacing={1}>
+    <Grid container justifyContent="center" spacing={0}>
       <Grid item xs={12}>
-        <Toolbar>
-          <Typography variant="h6">Navigation</Typography>
-        </Toolbar>
+        <Navigation />
       </Grid>
       <Grid item xs={12}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6">Product Name</Typography>
+        <AppBar position="static" color="transparent" elevation={1}>
+          <Toolbar className={classes.subheader}>
+            <Grid container justifyContent="space-between">
+              <Grid item>
+                <Typography variant="h6">Product Name</Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">$999</Typography>
+              </Grid>
+            </Grid>
           </Toolbar>
         </AppBar>
       </Grid>
-      <Grid item xs={5}>
-        Image
+      <Grid
+        className={classes.content}
+        container
+        item
+        xs={5}
+        justifyContent="center"
+      >
+        <Grid item>
+          <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-pro-family-hero"></img>
+        </Grid>
       </Grid>
-      <Grid item xs={4}>
-        Description
+      <Grid
+        className={classes.content}
+        container
+        item
+        xs={4}
+        justifyContent="center"
+      >
+        <Grid item>
+          <Typography variant="h2">Description</Typography>
+        </Grid>
       </Grid>
     </Grid>
   );
