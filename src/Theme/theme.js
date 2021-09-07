@@ -1,23 +1,11 @@
 import { createTheme } from "@material-ui/core/styles";
 
+import { typography } from "./light/typography";
+import { palette } from "./light/palette";
+import { overrides } from "./light/overrides";
+
 export const theme = createTheme({
-  typography: {
-    fontFamily: "helvetica",
-  },
-  palette: {
-    primary: { main: "#111" },
-  },
-  overrides: {
-    MuiAppBar: {
-      root: {
-        margin: 0,
-      },
-      colorPrimary: {},
-    },
-    MuiIconButton: {
-      root: {
-        color: "#fff",
-      },
-    },
-  },
+  typography,
+  palette,
+  overrides,
 });

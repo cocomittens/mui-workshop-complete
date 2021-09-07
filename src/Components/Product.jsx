@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "material-ui-image";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -29,6 +30,13 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     padding: theme.spacing(4),
+  },
+  imageContainer: {
+    width: "100%",
+  },
+  image: {
+    borderRadius: "5vw",
+    maxHeight: "60vh",
   },
 }));
 
@@ -61,8 +69,13 @@ const Product = () => {
         xs={5}
         justifyContent="center"
       >
-        <Grid item>
-          <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-pro-family-hero"></img>
+        <Grid item className={classes.imageContainer}>
+          <Image
+            className={classes.image}
+            src={process.env.PUBLIC_URL + "/images/cats/cat1.jpg"}
+            color="transparent"
+            cover
+          ></Image>
         </Grid>
       </Grid>
       <Grid
@@ -73,7 +86,7 @@ const Product = () => {
         justifyContent="center"
       >
         <Grid item>
-          <Typography variant="h2">Description</Typography>
+          <Typography variant="h1">Description</Typography>
         </Grid>
       </Grid>
     </Grid>

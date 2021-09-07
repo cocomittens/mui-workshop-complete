@@ -1,5 +1,4 @@
 import React from "react";
-import "normalize.css";
 import { makeStyles } from "@material-ui/core/styles";
 
 // components
