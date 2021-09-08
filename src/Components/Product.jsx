@@ -38,7 +38,7 @@ const Product = () => {
   const classes = useStyles();
 
   const [selectedSpecies, setSelectedSpecies] = useState("cat");
-  const [selectedType, setSelectedType] = useState(null);
+  const [selectedType, setSelectedType] = useState("gray");
   const [selectedPersonality, setSelectedPersonality] = useState(null);
 
   return (
@@ -70,7 +70,11 @@ const Product = () => {
         <Grid item className={classes.imageContainer}>
           <Image
             className={classes.image}
-            src={process.env.PUBLIC_URL + types[selectedSpecies][0].image}
+            src={
+              process.env.PUBLIC_URL +
+              types[selectedSpecies].find((type) => type.name === selectedType)
+                .image
+            }
             color="transparent"
             cover
           />

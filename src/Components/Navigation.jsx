@@ -37,12 +37,12 @@ const Navigation = () => {
       <Toolbar variant="dense" className={classes.navigation}>
         <Grid container justifyContent="space-between">
           <Grid item>
-            <IconButton>
+            <IconButton edge="start">
               <SettingsIcon />
             </IconButton>
           </Grid>
           <Grid item>
-            <IconButton>
+            <IconButton edge="end">
               <ShopIcon />
             </IconButton>
           </Grid>

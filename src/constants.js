@@ -15,12 +15,12 @@ export const types = {
   ],
   capybara: [
     { name: "bee", image: "images/capybaras/capy1.jpeg" },
-    { name: "bee", image: "images/capybaras/capy2.jpg" },
+    { name: "normal", image: "images/capybaras/capy2.jpg" },
   ],
 };
 
 export const personalities = {
   cat: ["reserved", "clingy", "mischievious", "sweet"],
-  dog: ["friendly", "extra friendly", "super extra friendly"],
-  capybara: ["cool", "extra cool", "super extra cool"],
+  dog: ["friendly", "active", "adventurous"],
+  capybara: ["cool", "amazing", "the best"],
 };
