@@ -3,7 +3,6 @@ export const overrides = {
     root: {
       margin: 0,
     },
-    colorPrimary: {},
   },
   MuiIconButton: {
     root: {

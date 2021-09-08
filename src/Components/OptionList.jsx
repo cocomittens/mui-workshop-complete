@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const OptionList = (props) => {
-  const { title, options, clickHandler } = props;
+  const { options, clickHandler } = props;
   const classes = useStyles();
 
   return (
@@ -30,7 +30,7 @@ const OptionList = (props) => {
       <Grid item xs={12}>
         <Divider />
         <Typography variant="h5" gutterBottom>
-          {title}
+          {props.title}
         </Typography>
       </Grid>
       {options.map((option, i) => (
@@ -43,9 +43,16 @@ const OptionList = (props) => {
           <Button
             variant="outlined"
             onClick={() => {
-              clickHandler(option);
+              props.optionValues
+                ? clickHandler(props.optionValues[i])
+                : clickHandler(option);
             }}
-            className={props.selected === option && classes.selected}
+            className={
+              (props.selected === option ||
+                (props.optionValues &&
+                  props.selected === props.optionValues[i])) &&
+              classes.selected
+            }
             disabled={props.disabled}
           >
             <Box

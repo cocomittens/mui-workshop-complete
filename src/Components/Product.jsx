@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "material-ui-image";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 // constants
 import { species, types, personalities } from "../constants";
@@ -17,6 +17,10 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
+import Divider from "@material-ui/core/Divider";
+
+import ShopIcon from "@material-ui/icons/Shop";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 
 const useStyles = makeStyles((theme) => ({
   productBar: { backgroundColor: theme.palette.primary.light },
@@ -34,15 +38,20 @@ const useStyles = makeStyles((theme) => ({
   image: {
     borderRadius: "5vw",
     maxHeight: "60vh",
+    boxShadow: "1px 1px 8px 1px #dedede",
   },
   cartItem: {
     width: "20vw",
     padding: `0 ${theme.spacing(1)}`,
   },
+  btn: {
+    marginTop: "2vh",
+  },
 }));
 
 const Product = () => {
   const classes = useStyles();
+  const theme = useTheme();
 
   const [selectedSpecies, setSelectedSpecies] = useState(null);
   const [selectedType, setSelectedType] = useState(null);
@@ -57,7 +66,8 @@ const Product = () => {
   };
 
   const handleClick = () => {
-    setCart([...cart, generateCartItem()]);
+    const name = [selectedPersonality, selectedType, selectedSpecies].join(" ");
+    if (!cart.includes(name)) setCart([...cart, generateCartItem()]);
     resetSelections();
   };
 
@@ -109,7 +119,7 @@ const Product = () => {
             </Grid>
             <Grid item>
               <Typography variant="h5">
-                {!selectedSpecies && "From $999,999,999"}
+                {selectedSpecies ? "$999,999,999" : "From $999,999,999"}
               </Typography>
             </Grid>
           </Grid>
@@ -145,6 +155,9 @@ const Product = () => {
             alignContent="flex-start"
             width="100%"
           >
+            <Typography variant="body1" color="secondary">
+              Sale
+            </Typography>
             <Typography variant="h2" gutterBottom>
               Buy Pet
             </Typography>
@@ -161,8 +174,20 @@ const Product = () => {
           />
           <OptionList
             title="Type"
-            options={types[selectedSpecies || "cat"].map((type) => type.name)}
+            options={types[selectedSpecies || "cat"].map((type) => (
+              <FiberManualRecordIcon
+                fontSize="large"
+                style={{
+                  color: type.color,
+                  stroke: theme.palette.primary.main,
+                  strokeWidth: "1px",
+                }}
+              />
+            ))}
             secondaryOptions={types[selectedSpecies || "cat"].map(
+              (type) => type.name
+            )}
+            optionValues={types[selectedSpecies || "cat"].map(
               (type) => type.name
             )}
             columns={2}
@@ -181,10 +206,13 @@ const Product = () => {
             selected={selectedPersonality}
           />
           <Button
+            className={classes.btn}
             variant="contained"
             color="secondary"
             onClick={handleClick}
             disabled={!selectedPersonality}
+            startIcon={<ShopIcon />}
+            size="large"
           >
             <Typography variant="button">Add to Cart</Typography>
           </Button>

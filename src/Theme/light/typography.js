@@ -16,5 +16,6 @@ export const typography = {
   },
   h6: {
     fontWeight: 400,
+    textTransform: "none",
   },
 };
