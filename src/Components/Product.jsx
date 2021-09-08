@@ -2,6 +2,7 @@ import React from "react";
 import Image from "material-ui-image";
 
 import { makeStyles } from "@material-ui/core/styles";
+import OptionList from "./OptionList";
 
 // components
 import Navigation from "./Navigation";
@@ -11,17 +12,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import Link from "@material-ui/core/Link";
-import Modal from "@material-ui/core/Modal";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import List from "@material-ui/core/List";
 import Paper from "@material-ui/core/Paper";
-import ImageList from "@material-ui/core/ImageList";
+import Box from "@material-ui/core/Box";
 
-// icons
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   subheader: {
@@ -53,10 +47,10 @@ const Product = () => {
           <Toolbar className={classes.subheader}>
             <Grid container justifyContent="space-between">
               <Grid item>
-                <Typography variant="h6">Product Name</Typography>
+                <Typography variant="h5">Pet Name</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="h6">$999</Typography>
+                <Typography variant="h5">$999</Typography>
               </Grid>
             </Grid>
           </Toolbar>
@@ -75,7 +69,7 @@ const Product = () => {
             src={process.env.PUBLIC_URL + "/images/cats/cat1.jpg"}
             color="transparent"
             cover
-          ></Image>
+          />
         </Grid>
       </Grid>
       <Grid
@@ -85,9 +79,21 @@ const Product = () => {
         xs={4}
         justifyContent="center"
       >
-        <Grid item>
-          <Typography variant="h1">Description</Typography>
-        </Grid>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignContent="flex-start"
+          width="100%"
+        >
+          <Typography variant="h2">Buy Pet</Typography>
+          <Typography variant="subtitle1">Cool fun animal</Typography>
+        </Box>
+        <OptionList title="Species" options={["cat", "dog", "capybara"]} />
+        <OptionList title="Color" options={["cat", "dog", "capybara"]} />
+        <OptionList title="Personality" options={["cat", "dog", "capybara"]} />
+        <Button variant="contained">
+          <Typography variant="button">Add to Cart</Typography>
+        </Button>
       </Grid>
     </Grid>
   );

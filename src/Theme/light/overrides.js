@@ -10,4 +10,9 @@ export const overrides = {
       color: "#fff",
     },
   },
+  MuiButton: {
+    root: {
+      width: "100%",
+    },
+  },
 };
