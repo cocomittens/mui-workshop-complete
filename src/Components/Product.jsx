@@ -1,20 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "material-ui-image";
-
 import { makeStyles } from "@material-ui/core/styles";
-import OptionList from "./OptionList";
+
+// constants
+import { species, types, personalities } from "../constants";
 
 // components
 import Navigation from "./Navigation";
+import OptionList from "./OptionList";
 
 // mui components
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
-
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Product = () => {
   const classes = useStyles();
+  const [species, setSpecies] = useState(null);
+  const [type, setType] = useState(null);
+  const [personality, setPersonality] = useState(null);
 
   return (
     <Grid container justifyContent="center" spacing={0}>
@@ -66,7 +69,7 @@ const Product = () => {
         <Grid item className={classes.imageContainer}>
           <Image
             className={classes.image}
-            src={process.env.PUBLIC_URL + "/images/cats/cat1.jpg"}
+            src={process.env.PUBLIC_URL + types.capybara[0].image}
             color="transparent"
             cover
           />
@@ -85,12 +88,16 @@ const Product = () => {
           alignContent="flex-start"
           width="100%"
         >
-          <Typography variant="h2">Buy Pet</Typography>
-          <Typography variant="subtitle1">Cool fun animal</Typography>
+          <Typography variant="h2" gutterBottom>
+            Buy Pet
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            Cool fun animal
+          </Typography>
         </Box>
-        <OptionList title="Species" options={["cat", "dog", "capybara"]} />
-        <OptionList title="Color" options={["cat", "dog", "capybara"]} />
-        <OptionList title="Personality" options={["cat", "dog", "capybara"]} />
+        <OptionList title="Species" options={species} />
+        <OptionList title="Type" options={species} columns={2} />
+        <OptionList title="Personality" options={species} columns={2} />
         <Button variant="contained">
           <Typography variant="button">Add to Cart</Typography>
         </Button>

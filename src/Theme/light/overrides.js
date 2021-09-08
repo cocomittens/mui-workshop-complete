@@ -15,4 +15,10 @@ export const overrides = {
       width: "100%",
     },
   },
+  MuiDivider: {
+    root: {
+      marginBottom: "2vh",
+      marginTop: "2vh",
+    },
+  },
 };

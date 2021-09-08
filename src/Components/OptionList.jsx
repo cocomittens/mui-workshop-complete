@@ -17,25 +17,30 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 const useStyles = makeStyles((theme) => ({
-  optionButton: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
+  list: { marginBottom: theme.spacing(1) },
 }));
 
 const OptionList = (props) => {
-  const { title, options } = props;
+  const { title, options, columns } = props;
   const classes = useStyles();
 
   return (
-    <Grid container item>
+    <Grid
+      className={classes.list}
+      container
+      item
+      justifyContent="space-between"
+      alignContent="flex-start"
+      spacing={1}
+    >
       <Grid item xs={12}>
-        <Typography variant="h5" display="block">
+        <Divider />
+        <Typography variant="h5" gutterBottom>
           {title}
         </Typography>
       </Grid>
       {options.map((option) => (
-        <Grid item xs={12} className={classes.optionButton}>
+        <Grid item xs={columns > 1 ? 6 : 12} className={classes.optionButton}>
           <Button variant="outlined">
             <Box
               display="flex"
