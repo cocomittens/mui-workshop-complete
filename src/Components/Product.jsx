@@ -159,7 +159,12 @@ const Product = () => {
               Sale
             </Typography>
             <Typography variant="h2" gutterBottom>
-              Buy Pet
+              Buy{" "}
+              {selectedSpecies
+                ? `${selectedSpecies
+                    .substring(0, 1)
+                    .toUpperCase()}${selectedSpecies.substring(1)} `
+                : "Pet"}
             </Typography>
             <Typography variant="subtitle1" gutterBottom>
               Cool fun animal
