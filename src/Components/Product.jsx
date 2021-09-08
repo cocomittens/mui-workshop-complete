@@ -42,7 +42,13 @@ const Product = () => {
   const [selectedSpecies, setSelectedSpecies] = useState("cat");
   const [selectedType, setSelectedType] = useState(null);
   const [selectedPersonality, setSelectedPersonality] = useState(null);
+  const [cart, setCart] = useState(["Your cart is empty."]);
+
   const [currentImage, setCurrentImage] = useState("");
+
+  const handleClick = () => {
+    setCart([...cart, selectedSpecies]);
+  };
 
   useEffect(() => {
     const defaultType = types[selectedSpecies][0];
@@ -56,7 +62,7 @@ const Product = () => {
 
   return (
     <div>
-      <Navigation />
+      <Navigation cart={cart} />
       <AppBar
         position="sticky"
         color="inherit"
@@ -133,7 +139,7 @@ const Product = () => {
             disabled={!selectedType}
             direction="column"
           />
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" onClick={handleClick}>
             <Typography variant="button">Add to Cart</Typography>
           </Button>
         </Grid>

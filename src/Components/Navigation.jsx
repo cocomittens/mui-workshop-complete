@@ -23,30 +23,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navigation = () => {
+const Navigation = (props) => {
   const classes = useStyles();
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+
+  // const themeRef = React.useRef(null);
+  const cartRef = React.useRef(null);
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
   const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+    if (cartRef.current && cartRef.current.contains(event.target)) {
       return;
     }
 
     setOpen(false);
   };
 
-  // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
 
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
+      cartRef.current.focus();
     }
 
     prevOpen.current = open;
@@ -57,19 +59,20 @@ const Navigation = () => {
       <Toolbar variant="dense" className={classes.navigation}>
         <Grid container justifyContent="space-between">
           <Grid item>
-            <IconButton edge="start" ref={anchorRef} onClick={handleToggle}>
+            <IconButton edge="start">
               <SettingsIcon />
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton ref={cartRef} onClick={handleToggle} edge="end">
+              <ShopIcon />
             </IconButton>
             <PopupMenu
               handleClose={handleClose}
               open={open}
-              anchorRef={anchorRef}
+              anchorRef={cartRef}
+              items={props.cart}
             />
-          </Grid>
-          <Grid item>
-            <IconButton edge="end">
-              <ShopIcon />
-            </IconButton>
           </Grid>
         </Grid>
       </Toolbar>

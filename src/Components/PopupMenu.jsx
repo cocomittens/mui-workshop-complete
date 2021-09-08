@@ -30,9 +30,9 @@ const PopupMenu = (props) => {
           <Paper>
             <ClickAwayListener onClickAway={props.handleClose}>
               <MenuList autoFocusItem={props.open} id="menu-list-grow">
-                <MenuItem onClick={props.handleClose}>Profile</MenuItem>
-                <MenuItem onClick={props.handleClose}>My account</MenuItem>
-                <MenuItem onClick={props.handleClose}>Logout</MenuItem>
+                {props.items.map((item) => (
+                  <MenuItem onClick={props.handleClose}>{item}</MenuItem>
+                ))}
               </MenuList>
             </ClickAwayListener>
           </Paper>
