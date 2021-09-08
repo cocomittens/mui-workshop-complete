@@ -10,13 +10,7 @@ import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles((theme) => ({
-  emptyListItem: {
-    width: "20vw",
-    display: "flex",
-    justifyContent: "center",
-  },
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 const PopupMenu = (props) => {
   const classes = useStyles();
@@ -44,10 +38,7 @@ const PopupMenu = (props) => {
                   <MenuItem onClick={props.handleClose}>{item}</MenuItem>
                 ))}
                 {!props.items.length && (
-                  <MenuItem
-                    className={classes.emptyListItem}
-                    onClick={props.handleClose}
-                  >
+                  <MenuItem onClick={props.handleClose}>
                     <Typography variant="body1">Your cart is empty.</Typography>
                   </MenuItem>
                 )}
