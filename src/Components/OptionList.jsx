@@ -9,18 +9,13 @@ import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 
-const useStyles = makeStyles((theme) => ({
-  list: { marginBottom: theme.spacing(1) },
-  selected: { borderColor: theme.palette.secondary.main },
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 const OptionList = (props) => {
-  const { options, clickHandler } = props;
   const classes = useStyles();
 
   return (
     <Grid
-      className={classes.list}
       container
       item
       justifyContent="space-between"
@@ -33,43 +28,21 @@ const OptionList = (props) => {
           {props.title}
         </Typography>
       </Grid>
-      {options.map((option, i) => (
-        <Grid
-          item
-          xs={props.columns > 1 ? 6 : 12}
-          className={classes.optionButton}
-          key={i}
-        >
+      {props.options.map((option, i) => (
+        <Grid item xs={props.columns > 1 ? 6 : 12} key={i}>
           <Button
             variant="outlined"
             onClick={() => {
               props.optionValues
-                ? clickHandler(props.optionValues[i])
-                : clickHandler(option);
+                ? props.clickHandler(props.optionValues[i])
+                : props.clickHandler(option);
             }}
-            className={
-              (props.selected === option ||
-                (props.optionValues &&
-                  props.selected === props.optionValues[i])) &&
-              classes.selected
-            }
             disabled={props.disabled}
           >
-            <Box
-              display="flex"
-              flexDirection={props.direction}
-              justifyContent="space-between"
-              alignItems="center"
-              width="100%"
-              p={1}
-            >
-              <Typography variant="h5">{option}</Typography>
-              {props.secondaryOptions && (
-                <Typography variant="h6">
-                  {props.secondaryOptions[i]}
-                </Typography>
-              )}
-            </Box>
+            <Typography variant="h5">{option}</Typography>
+            {props.secondaryOptions && (
+              <Typography variant="h6">{props.secondaryOptions[i]}</Typography>
+            )}
           </Button>
         </Grid>
       ))}

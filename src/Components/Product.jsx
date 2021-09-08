@@ -17,37 +17,11 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
-import Divider from "@material-ui/core/Divider";
 
 import ShopIcon from "@material-ui/icons/Shop";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 
-const useStyles = makeStyles((theme) => ({
-  productBar: { backgroundColor: theme.palette.primary.light },
-  subheader: {
-    width: "70vw",
-    margin: "0 auto",
-    position: "sticky",
-  },
-  content: {
-    padding: theme.spacing(4),
-  },
-  imageContainer: {
-    width: "100%",
-  },
-  image: {
-    borderRadius: "5vw",
-    maxHeight: "60vh",
-    boxShadow: "1px 1px 8px 1px #dedede",
-  },
-  cartItem: {
-    width: "20vw",
-    padding: `0 ${theme.spacing(1)}`,
-  },
-  btn: {
-    marginTop: "2vh",
-  },
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 const Product = () => {
   const classes = useStyles();
@@ -84,12 +58,7 @@ const Product = () => {
   const generateCartItem = () => {
     const name = [selectedPersonality, selectedType, selectedSpecies].join(" ");
     return (
-      <Grid
-        className={classes.cartItem}
-        container
-        alignItems="center"
-        spacing={2}
-      >
+      <Grid container alignItems="center" spacing={2}>
         <Grid item>
           <Avatar src={currentImage} variant="square" />
         </Grid>
@@ -103,13 +72,8 @@ const Product = () => {
   return (
     <div>
       <Navigation cart={cart} />
-      <AppBar
-        position="sticky"
-        color="inherit"
-        elevation={1}
-        classes={classes.productBar}
-      >
-        <Toolbar className={classes.subheader}>
+      <AppBar position="sticky" color="inherit" elevation={1}>
+        <Toolbar>
           <Grid container justifyContent="space-between">
             <Grid item>
               <Typography variant="h5">
@@ -126,50 +90,31 @@ const Product = () => {
         </Toolbar>
       </AppBar>
       <Grid container justifyContent="center" spacing={0}>
-        <Grid
-          className={classes.content}
-          container
-          item
-          xs={5}
-          justifyContent="center"
-        >
-          <Grid item className={classes.imageContainer}>
+        <Grid container item xs={5} justifyContent="center">
+          <Grid item>
             <Image
-              className={classes.image}
               src={process.env.PUBLIC_URL + currentImage}
               color="transparent"
               cover
             />
           </Grid>
         </Grid>
-        <Grid
-          className={classes.content}
-          container
-          item
-          xs={4}
-          justifyContent="center"
-        >
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignContent="flex-start"
-            width="100%"
-          >
-            <Typography variant="body1" color="secondary">
-              Sale
-            </Typography>
-            <Typography variant="h2" gutterBottom>
-              Buy{" "}
-              {selectedSpecies
-                ? `${selectedSpecies
-                    .substring(0, 1)
-                    .toUpperCase()}${selectedSpecies.substring(1)} `
-                : "Pet"}
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              Cool fun animal
-            </Typography>
-          </Box>
+        <Grid container item xs={4} justifyContent="center">
+          <Typography variant="body1" color="secondary">
+            Sale
+          </Typography>
+          <Typography variant="h2" gutterBottom>
+            Buy{" "}
+            {selectedSpecies
+              ? `${selectedSpecies
+                  .substring(0, 1)
+                  .toUpperCase()}${selectedSpecies.substring(1)} `
+              : "Pet"}
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            Cool fun animal
+          </Typography>
+
           <OptionList
             title="Species"
             options={species.map((species) => species.name)}
@@ -211,7 +156,6 @@ const Product = () => {
             selected={selectedPersonality}
           />
           <Button
-            className={classes.btn}
             variant="contained"
             color="secondary"
             onClick={handleClick}
