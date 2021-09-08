@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "material-ui-image";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -40,7 +40,19 @@ const Product = () => {
   const [selectedSpecies, setSelectedSpecies] = useState("cat");
   const [selectedType, setSelectedType] = useState("gray");
   const [selectedPersonality, setSelectedPersonality] = useState(null);
+  const [currentImage, setCurrentImage] = useState("");
 
+  useEffect(() => {
+    const defaultType = types[selectedSpecies][0];
+    const result = types[selectedSpecies].find(
+      (type) => type.name === selectedType
+    );
+    let currentType = defaultType;
+    if (result) currentType = result;
+    setCurrentImage(currentType.image);
+  }, [selectedSpecies, selectedType]);
+
+  console.log(selectedSpecies, selectedType);
   return (
     <Grid container justifyContent="center" spacing={0}>
       <Grid item xs={12}>
@@ -70,11 +82,7 @@ const Product = () => {
         <Grid item className={classes.imageContainer}>
           <Image
             className={classes.image}
-            src={
-              process.env.PUBLIC_URL +
-              types[selectedSpecies].find((type) => type.name === selectedType)
-                .image
-            }
+            src={process.env.PUBLIC_URL + currentImage}
             color="transparent"
             cover
           />
