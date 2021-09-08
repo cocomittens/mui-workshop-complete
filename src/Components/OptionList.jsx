@@ -1,27 +1,20 @@
 import React from "react";
-import Image from "material-ui-image";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-// components
-import Navigation from "./Navigation";
-
 // mui components
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
+
 const useStyles = makeStyles((theme) => ({
   list: { marginBottom: theme.spacing(1) },
 }));
 
 const OptionList = (props) => {
-  const { title, options, columns, clickHandler } = props;
+  const { title, options, clickHandler } = props;
   const classes = useStyles();
 
   return (
@@ -39,18 +32,31 @@ const OptionList = (props) => {
           {title}
         </Typography>
       </Grid>
-      {options.map((option) => (
-        <Grid item xs={columns > 1 ? 6 : 12} className={classes.optionButton}>
-          <Button variant="outlined" onClick={() => clickHandler(option)}>
+      {options.map((option, i) => (
+        <Grid
+          item
+          xs={props.columns > 1 ? 6 : 12}
+          className={classes.optionButton}
+        >
+          <Button
+            variant="outlined"
+            onClick={() => clickHandler(option)}
+            disabled={props.disabled}
+          >
             <Box
               display="flex"
+              flexDirection={props.direction}
               justifyContent="space-between"
               alignItems="center"
               width="100%"
               p={1}
             >
               <Typography variant="h5">{option}</Typography>
-              <Typography variant="h6">$999</Typography>
+              {props.secondaryOptions && (
+                <Typography variant="h6">
+                  {props.secondaryOptions[i]}
+                </Typography>
+              )}
             </Box>
           </Button>
         </Grid>

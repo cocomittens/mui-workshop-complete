@@ -1,4 +1,8 @@
-export const species = ["cat", "dog", "capybara"];
+export const species = [
+  { name: "cat", price: "$999,999,999" },
+  { name: "dog", price: "$999,999,999" },
+  { name: "capybara", price: "$999,999,999" },
+];
 
 export const types = {
   cat: [
@@ -21,6 +25,6 @@ export const types = {
 
 export const personalities = {
   cat: ["reserved", "clingy", "mischievious", "sweet"],
-  dog: ["friendly", "active", "adventurous"],
-  capybara: ["cool", "amazing", "the best"],
+  dog: ["friendly", "active", "adventurous", "hungry"],
+  capybara: ["cool", "happy", "chill", "hungry"],
 };
