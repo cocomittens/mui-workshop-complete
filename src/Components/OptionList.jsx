@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -11,6 +11,7 @@ import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   list: { marginBottom: theme.spacing(1) },
+  selected: { borderColor: theme.palette.secondary.main },
 }));
 
 const OptionList = (props) => {
@@ -37,10 +38,14 @@ const OptionList = (props) => {
           item
           xs={props.columns > 1 ? 6 : 12}
           className={classes.optionButton}
+          key={i}
         >
           <Button
             variant="outlined"
-            onClick={() => clickHandler(option)}
+            onClick={() => {
+              clickHandler(option);
+            }}
+            className={props.selected === option && classes.selected}
             disabled={props.disabled}
           >
             <Box

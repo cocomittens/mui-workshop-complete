@@ -8,8 +8,18 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Popper from "@material-ui/core/Popper";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+
+const useStyles = makeStyles((theme) => ({
+  emptyListItem: {
+    width: "20vw",
+    display: "flex",
+    justifyContent: "center",
+  },
+}));
 
 const PopupMenu = (props) => {
+  const classes = useStyles();
   return (
     <Popper
       open={props.open}
@@ -33,6 +43,14 @@ const PopupMenu = (props) => {
                 {props.items.map((item) => (
                   <MenuItem onClick={props.handleClose}>{item}</MenuItem>
                 ))}
+                {!props.items.length && (
+                  <MenuItem
+                    className={classes.emptyListItem}
+                    onClick={props.handleClose}
+                  >
+                    <Typography variant="body1">Your cart is empty.</Typography>
+                  </MenuItem>
+                )}
               </MenuList>
             </ClickAwayListener>
           </Paper>

@@ -16,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme) => ({
   productBar: { backgroundColor: theme.palette.primary.light },
@@ -34,31 +35,60 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "5vw",
     maxHeight: "60vh",
   },
+  cartItem: {
+    width: "20vw",
+    padding: `0 ${theme.spacing(1)}`,
+  },
 }));
 
 const Product = () => {
   const classes = useStyles();
 
-  const [selectedSpecies, setSelectedSpecies] = useState("cat");
+  const [selectedSpecies, setSelectedSpecies] = useState(null);
   const [selectedType, setSelectedType] = useState(null);
   const [selectedPersonality, setSelectedPersonality] = useState(null);
-  const [cart, setCart] = useState(["Your cart is empty."]);
+  const [cart, setCart] = useState([]);
 
   const [currentImage, setCurrentImage] = useState("");
 
+  const resetSelections = () => {
+    setSelectedType(null);
+    setSelectedPersonality(null);
+  };
+
   const handleClick = () => {
-    setCart([...cart, selectedSpecies]);
+    setCart([...cart, generateCartItem()]);
+    resetSelections();
   };
 
   useEffect(() => {
-    const defaultType = types[selectedSpecies][0];
-    const result = types[selectedSpecies].find(
+    const defaultType = types[selectedSpecies || "cat"][0];
+    const result = types[selectedSpecies || "cat"].find(
       (type) => type.name === selectedType
     );
     let currentType = defaultType;
     if (result) currentType = result;
     setCurrentImage(currentType.image);
   }, [selectedSpecies, selectedType]);
+
+  const generateCartItem = () => {
+    const name = [selectedPersonality, selectedType, selectedSpecies].join(" ");
+    return (
+      <Grid
+        className={classes.cartItem}
+        container
+        alignItems="center"
+        spacing={2}
+      >
+        <Grid item>
+          <Avatar src={currentImage} variant="square" />
+        </Grid>
+        <Grid item>
+          <Typography variant="body1">{name}</Typography>
+        </Grid>
+      </Grid>
+    );
+  };
 
   return (
     <div>
@@ -72,10 +102,15 @@ const Product = () => {
         <Toolbar className={classes.subheader}>
           <Grid container justifyContent="space-between">
             <Grid item>
-              <Typography variant="h5">{selectedSpecies}</Typography>
+              <Typography variant="h5">
+                {[selectedPersonality, selectedType, selectedSpecies].join(" ")}
+                {!selectedSpecies && "Pet"}
+              </Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h5">$999,999,999</Typography>
+              <Typography variant="h5">
+                {!selectedSpecies && "From $999,999,999"}
+              </Typography>
             </Grid>
           </Grid>
         </Toolbar>
@@ -122,24 +157,35 @@ const Product = () => {
             options={species.map((species) => species.name)}
             secondaryOptions={species.map((species) => species.price)}
             clickHandler={setSelectedSpecies}
+            selected={selectedSpecies}
           />
           <OptionList
             title="Type"
-            options={types[selectedSpecies].map((type) => type.name)}
-            secondaryOptions={types[selectedSpecies].map((type) => type.name)}
+            options={types[selectedSpecies || "cat"].map((type) => type.name)}
+            secondaryOptions={types[selectedSpecies || "cat"].map(
+              (type) => type.name
+            )}
             columns={2}
             clickHandler={setSelectedType}
             direction="column"
+            selected={selectedType}
+            disabled={!selectedSpecies}
           />
           <OptionList
             title="Personality"
-            options={personalities[selectedSpecies]}
+            options={personalities[selectedSpecies || "cat"]}
             columns={2}
             clickHandler={setSelectedPersonality}
             disabled={!selectedType}
             direction="column"
+            selected={selectedPersonality}
           />
-          <Button variant="contained" color="secondary" onClick={handleClick}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleClick}
+            disabled={!selectedPersonality}
+          >
             <Typography variant="button">Add to Cart</Typography>
           </Button>
         </Grid>
