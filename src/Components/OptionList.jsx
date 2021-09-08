@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const OptionList = (props) => {
-  const { title, options, columns } = props;
+  const { title, options, columns, clickHandler } = props;
   const classes = useStyles();
 
   return (
@@ -41,7 +41,7 @@ const OptionList = (props) => {
       </Grid>
       {options.map((option) => (
         <Grid item xs={columns > 1 ? 6 : 12} className={classes.optionButton}>
-          <Button variant="outlined">
+          <Button variant="outlined" onClick={() => clickHandler(option)}>
             <Box
               display="flex"
               justifyContent="space-between"

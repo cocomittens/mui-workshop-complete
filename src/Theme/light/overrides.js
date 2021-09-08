@@ -21,4 +21,11 @@ export const overrides = {
       marginTop: "2vh",
     },
   },
+  MuiTypography: {
+    root: {
+      "&::first-letter": {
+        textTransform: "uppercase",
+      },
+    },
+  },
 };

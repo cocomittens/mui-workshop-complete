@@ -36,9 +36,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Product = () => {
   const classes = useStyles();
-  const [species, setSpecies] = useState(null);
-  const [type, setType] = useState(null);
-  const [personality, setPersonality] = useState(null);
+
+  const [selectedSpecies, setSelectedSpecies] = useState("cat");
+  const [selectedType, setSelectedType] = useState(null);
+  const [selectedPersonality, setSelectedPersonality] = useState(null);
 
   return (
     <Grid container justifyContent="center" spacing={0}>
@@ -50,7 +51,7 @@ const Product = () => {
           <Toolbar className={classes.subheader}>
             <Grid container justifyContent="space-between">
               <Grid item>
-                <Typography variant="h5">Pet Name</Typography>
+                <Typography variant="h5">{selectedSpecies}</Typography>
               </Grid>
               <Grid item>
                 <Typography variant="h5">$999</Typography>
@@ -69,7 +70,7 @@ const Product = () => {
         <Grid item className={classes.imageContainer}>
           <Image
             className={classes.image}
-            src={process.env.PUBLIC_URL + types.capybara[0].image}
+            src={process.env.PUBLIC_URL + types[selectedSpecies][0].image}
             color="transparent"
             cover
           />
@@ -95,9 +96,23 @@ const Product = () => {
             Cool fun animal
           </Typography>
         </Box>
-        <OptionList title="Species" options={species} />
-        <OptionList title="Type" options={species} columns={2} />
-        <OptionList title="Personality" options={species} columns={2} />
+        <OptionList
+          title="Species"
+          options={species}
+          clickHandler={setSelectedSpecies}
+        />
+        <OptionList
+          title="Type"
+          options={types[selectedSpecies].map((type) => type.name)}
+          columns={2}
+          clickHandler={setSelectedType}
+        />
+        <OptionList
+          title="Personality"
+          options={personalities[selectedSpecies]}
+          columns={2}
+          clickHandler={setSelectedPersonality}
+        />
         <Button variant="contained">
           <Typography variant="button">Add to Cart</Typography>
         </Button>
