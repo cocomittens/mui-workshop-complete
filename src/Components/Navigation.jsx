@@ -13,15 +13,7 @@ import PopupMenu from "./PopupMenu";
 import ShopIcon from "@material-ui/icons/Shop";
 import SettingsIcon from "@material-ui/icons/Settings";
 
-const useStyles = makeStyles((theme) => ({
-  navigation: {
-    width: "70vw",
-    margin: "0 auto",
-  },
-  icon: {
-    color: "#fff",
-  },
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 const Navigation = (props) => {
   const classes = useStyles();
@@ -56,7 +48,7 @@ const Navigation = (props) => {
 
   return (
     <AppBar position="static" color="primary">
-      <Toolbar variant="dense" className={classes.navigation}>
+      <Toolbar variant="dense">
         <Grid container justifyContent="space-between">
           <Grid item>
             <IconButton edge="start">
